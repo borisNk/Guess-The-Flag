@@ -2,6 +2,14 @@
 
 Project created for the purpose of learning Swift language. It shows three buttons, each one with a flag on it. On the top of the screen, there is a Navigation Bar where is shown the name of a country. You should guess which flag belongs to this country and click on it. 
 
+Here I make use of:
+
+* UIButton
+* UIImage
+* Dictionary
+* UIAlertController
+* UIAlertAction
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development  and testing purposes. See deployment for notes on how to deploy the project on a live system.
@@ -13,7 +21,7 @@ These instructions will get you a copy of the project up and running on your loc
 ### Installing
 
 1. Download or clone the repository into a folder in your local drive.
-2. Locate the file named **Storm Viewer.xcodeproj** and click on it to open the Xcode IDE. 
+2. Locate the file named **Guess The Flag.xcodeproj** and click on it to open the Xcode IDE. 
 
 ## Deployment
 
