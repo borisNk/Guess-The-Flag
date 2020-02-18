@@ -21,6 +21,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .search, target: self, action: #selector(showScoreTapped))
         
         setButtonsStyles()
         
@@ -61,20 +62,12 @@ class ViewController: UIViewController {
         }
         
         numberOfQuestionsAsked += 1
-        showAnswerAlert(title, endGame: numberOfQuestionsAsked < 10)
+        showAnswerAlert(title, endGame: numberOfQuestionsAsked == 10)
 
     }
     
-    fileprivate func setAlertProperties(_ endGame: Bool, _ message: inout String, _ actionTitle: inout String) {
-        if (endGame) {
-            message = "Your score is \(score)."
-            actionTitle = "Continue"
-        } else {
-            message = "Game Over. Your final score is \(score)."
-            actionTitle = "Begin Again"
-            score = 0
-            numberOfQuestionsAsked = 0
-        }
+    @objc func showScoreTapped() {
+        showAnswerAlert("Review Score", endGame: false)
     }
     
     func showAnswerAlert(_ title: String, endGame: Bool) {
@@ -86,6 +79,18 @@ class ViewController: UIViewController {
         let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: actionTitle, style: .default, handler: askQuestion))
         present(ac, animated: true)
+    }
+    
+    func setAlertProperties(_ endGame: Bool, _ message: inout String, _ actionTitle: inout String) {
+        if (endGame) {
+            message = "Game Over. Your final score is \(score)."
+            actionTitle = "Begin Again"
+            score = 0
+            numberOfQuestionsAsked = 0
+        } else {
+            message = "Your score is \(score)."
+            actionTitle = "Continue"
+        }
     }
 }
 
