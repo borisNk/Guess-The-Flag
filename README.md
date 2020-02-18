@@ -4,9 +4,15 @@ Project created for the purpose of learning Swift language. It shows three butto
 
 Here I make use of:
 
+* Dictionary
+* AutoLayout
+* @2x and @3x images
+* Asset catalogs
+* Random numbers
+* CALayer
+* UIColor
 * UIButton
 * UIImage
-* Dictionary
 * UIAlertController
 * UIAlertAction
 

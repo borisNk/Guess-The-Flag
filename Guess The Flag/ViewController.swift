@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     var countries = [String]()
     var correctAnswer = 0
     var score = 0
+    var numberOfQuestionsAsked = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,21 +47,44 @@ class ViewController: UIViewController {
         button3.setImage(UIImage(named: countries[2]), for: .normal)
         
         correctAnswer = Int.random(in: 0...2)
-        title = countries[correctAnswer].uppercased()
+        title = "\(countries[correctAnswer].uppercased()) Score: \(score)"
     }
-
+    
     @IBAction func buttonTapped(_ sender: UIButton) {
         var title: String
         if sender.tag == correctAnswer {
-            title = "Correct"
+            title = "Correct!"
             score += 1
         } else {
-            title = "Wrong"
+            title = "Wrong! That's the flag of \(countries[sender.tag].uppercased())"
             score -= 1
         }
         
-        let ac = UIAlertController(title: title, message: "Your score is \(score).", preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "Continue", style: .default, handler: askQuestion))
+        numberOfQuestionsAsked += 1
+        showAnswerAlert(title, endGame: numberOfQuestionsAsked < 10)
+
+    }
+    
+    fileprivate func setAlertProperties(_ endGame: Bool, _ message: inout String, _ actionTitle: inout String) {
+        if (endGame) {
+            message = "Your score is \(score)."
+            actionTitle = "Continue"
+        } else {
+            message = "Game Over. Your final score is \(score)."
+            actionTitle = "Begin Again"
+            score = 0
+            numberOfQuestionsAsked = 0
+        }
+    }
+    
+    func showAnswerAlert(_ title: String, endGame: Bool) {
+        var message = ""
+        var actionTitle = ""
+        
+        setAlertProperties(endGame, &message, &actionTitle)
+        
+        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: actionTitle, style: .default, handler: askQuestion))
         present(ac, animated: true)
     }
 }
